@@ -57,20 +57,33 @@
             font-weight: 300;
             margin-bottom: 10px;
             font-family: 'Times New Roman', Georgia, serif;
-            background: linear-gradient(135deg, #ffffff 0%, #888888 50%, #ffffff 100%);
-            background-size: 200% 200%;
+            background: linear-gradient(
+                135deg, 
+                #ffffff 0%, 
+                #fff 10%,
+                #888888 20%,
+                #fff 30%,
+                #888 40%,
+                #ffffff 50%,
+                #888 60%,
+                #fff 70%,
+                #888888 80%,
+                #fff 90%,
+                #ffffff 100%
+            );
+            background-size: 300% 300%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             text-transform: uppercase;
-            animation: fadeInDown 1s ease-out, shimmer 3s infinite;
+            animation: fadeInDown 1s ease-out, shimmer 2s infinite linear;
             position: relative;
+            filter: brightness(1.3) contrast(1.2);
         }
 
         @keyframes shimmer {
             0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
         }
 
         .tagline {
@@ -80,6 +93,7 @@
             text-transform: uppercase;
             margin-bottom: 50px;
             animation: fadeInUp 1s ease-out 0.3s both;
+            text-align: center;
         }
 
         /* Grid Container */
@@ -108,13 +122,27 @@
         .card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 100%);
-            opacity: 0;
-            transition: opacity 0.4s;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 0%,
+                transparent 40%,
+                rgba(255, 255, 255, 0.1) 45%,
+                rgba(255, 255, 255, 0.2) 50%,
+                rgba(255, 255, 255, 0.1) 55%,
+                transparent 60%,
+                transparent 100%
+            );
+            animation: cardShimmer 3s infinite linear;
+            opacity: 0.6;
+        }
+
+        @keyframes cardShimmer {
+            0% { transform: translate(-100%, -100%) rotate(45deg); }
+            100% { transform: translate(100%, 100%) rotate(45deg); }
         }
 
         .card:hover {
@@ -124,7 +152,7 @@
         }
 
         .card:hover::before {
-            opacity: 1;
+            animation-duration: 1.5s;
         }
 
         .card-title {
@@ -348,7 +376,7 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="logo-container">
-            <h1>B L V C K   L U S T E R</h1>
+            <h1>B L V C K L U S T E R</h1>
             <div class="tagline">Technical Art Studio | Real-Time Environments</div>
         </div>
         <div class="scroll-indicator">↓ Scroll to Explore</div>
@@ -387,6 +415,18 @@
             </div>
         </div>
 
+        <!-- Philosophy Card -->
+        <div class="card fade-in">
+            <h2 class="card-title">Philosophy</h2>
+            <div class="card-content">
+                <p style="color: #bbb; line-height: 1.8;">
+                    We believe in <strong style="color: #fff;">self-contained assets</strong> that carry their own DNA. 
+                    By baking intelligence into mesh data, we create portable, efficient, and future-proof content 
+                    that scales from mobile to high-end platforms. <strong style="color: #fff;">Zero dependencies. Maximum performance.</strong>
+                </p>
+            </div>
+        </div>
+
         <!-- Tech Stack Card -->
         <div class="card fade-in">
             <h2 class="card-title">Tech Stack</h2>
@@ -414,18 +454,6 @@
                     <li>Zero-Texture Asset Pipelines</li>
                     <li>Real-Time Environment Tools</li>
                 </ul>
-            </div>
-        </div>
-
-        <!-- Philosophy Card -->
-        <div class="card fade-in">
-            <h2 class="card-title">Philosophy</h2>
-            <div class="card-content">
-                <p style="color: #bbb; line-height: 1.8;">
-                    We believe in <strong style="color: #fff;">self-contained assets</strong> that carry their own DNA. 
-                    By baking intelligence into mesh data, we create portable, efficient, and future-proof content 
-                    that scales from mobile to high-end platforms. <strong style="color: #fff;">Zero dependencies. Maximum performance.</strong>
-                </p>
             </div>
         </div>
 
