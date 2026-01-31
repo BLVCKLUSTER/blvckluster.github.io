@@ -6,110 +6,475 @@
     <title>BLVCK | Technical Art Studio</title>
     <link rel="icon" type="image/png" href="favicon.png">
     <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #050505;
-            color: #ffffff;
-            text-align: center;
-            padding: 50px 20px;
+        * {
             margin: 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: auto;
-            border: 1px solid #1a1a1a;
-            padding: 40px;
-            border-radius: 12px;
-            background-color: #0a0a0a;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.8);
-        }
-        h1 {
-            font-size: 3.5em;
-            letter-spacing: 12px;
-            margin-bottom: 5px;
-            font-weight: 700;
-            color: #fff;
-            text-transform: uppercase;
-        }
-        .tagline {
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            font-size: 0.9em;
-            margin-bottom: 20px;
-        }
-        .protocol {
-            color: #bbb;
-            text-align: left;
-            margin: 0 auto 30px auto;
-            max-width: 600px;
-            line-height: 1.8;
-            font-size: 1.05em;
-        }
-        .protocol li {
-            margin-bottom: 8px;
-        }
-        .contact-section {
-            margin-top: 20px;
-            padding: 30px;
-            border-top: 1px solid #1a1a1a;
-            background: #0c0c0c;
-            border-radius: 0 0 12px 12px;
-        }
-        .contact-section h3 {
-            color: #fff;
-            margin-bottom: 15px;
-            font-size: 1.4em;
-        }
-        .email-link {
-            color: #007bff;
-            text-decoration: none;
-            font-size: 1.2em;
-            font-weight: 600;
-            border: 1px solid #007bff;
-            padding: 10px 20px;
-            border-radius: 5px;
-            transition: 0.3s;
-            display: inline-block;
-            margin: 10px 5px;
-        }
-        .email-link:hover {
-            background: #007bff;
-            color: #fff;
-        }
-        ul {
             padding: 0;
-            list-style: none;
+            box-sizing: border-box;
         }
-        ul li {
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #000000 0%, #0a0a0a 100%);
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.02) 50%, transparent 100%),
+                radial-gradient(circle at 50% 50%, rgba(255,255,255,0.03) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .logo-container {
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 7vw, 5rem);
+            letter-spacing: 25px;
+            font-weight: 300;
             margin-bottom: 10px;
+            font-family: 'Times New Roman', Georgia, serif;
+            background: linear-gradient(135deg, #ffffff 0%, #888888 50%, #ffffff 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+            animation: fadeInDown 1s ease-out, shimmer 3s infinite;
+            position: relative;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .tagline {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            color: #888;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 50px;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        /* Grid Container */
+        .grid-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Card Styles */
+        .card {
+            background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+            border: 1px solid #2a2a2a;
+            border-radius: 8px;
+            padding: 35px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: #3a3a3a;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #fff;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .card-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(90deg, #ffffff, transparent);
+        }
+
+        .card-content {
+            color: #bbb;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .card-content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .card-content li {
+            padding: 10px 0;
+            border-bottom: 1px solid #1a1a1a;
+            transition: all 0.3s;
+        }
+
+        .card-content li:last-child {
+            border-bottom: none;
+        }
+
+        .card-content li:hover {
+            padding-left: 10px;
+            color: #fff;
+        }
+
+        .card-content li::before {
+            content: '▸';
+            margin-right: 12px;
+            color: #666;
+            transition: color 0.3s;
+        }
+
+        .card-content li:hover::before {
+            color: #fff;
+        }
+
+        /* Featured Card (Protocols) */
+        .card.featured {
+            grid-column: span 2;
+            background: linear-gradient(145deg, #1f1f1f, #0a0a0a);
+            border: 1px solid #3a3a3a;
+        }
+
+        @media (max-width: 900px) {
+            .card.featured {
+                grid-column: span 1;
+            }
+        }
+
+        /* Links Section */
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .link-btn {
+            display: inline-block;
+            padding: 15px 25px;
+            background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+            border: 1px solid #2a2a2a;
+            border-radius: 6px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .link-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .link-btn:hover::before {
+            left: 100%;
+        }
+
+        .link-btn:hover {
+            transform: translateY(-3px);
+            border-color: #4a4a4a;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        /* Tech Stack Section */
+        .tech-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .badge {
+            padding: 8px 16px;
+            background: #0a0a0a;
+            border: 1px solid #2a2a2a;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #aaa;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+
+        .badge:hover {
+            background: #1a1a1a;
+            color: #fff;
+            border-color: #3a3a3a;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #555;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            border-top: 1px solid #1a1a1a;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #444;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                letter-spacing: 10px;
+            }
+            
+            .grid-container {
+                padding: 40px 15px;
+                gap: 20px;
+            }
+
+            .card {
+                padding: 25px;
+            }
+
+            .links-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>BLVCK</h1>
-        <div class="tagline">Technical Art Studio | Real-Time Environments</div>
-        
-        <ul class="protocol">
-            <li>• High-performance assets for modern real-time environments.</li>
-            <li>• Fully optimized for efficiency and scalability.</li>
-            <li>• Zero-Texture approach for lightweight, reusable content.</li>
-            <li>• Professional polish and immersive visuals in every asset.</li>
-        </ul>
-
-        <div class="contact-section">
-            <h3>Support & Portfolio</h3>
-            <p>Explore our work or reach out for inquiries:</p>
-            <ul>
-                <li><a href="mailto:blvckluster@gmail.com" class="email-link">blvckluster@gmail.com</a></li>
-                <li><a href="https://www.artstation.com/blvckluster" target="_blank" class="email-link">ArtStation Profile</a></li>
-                <li><a href="https://sketchfab.com/blvckluster" target="_blank" class="email-link">Sketchfab Profile</a></li>
-                <li><a href="https://github.com/blvckluster" target="_blank" class="email-link">GitHub Profile</a></li>
-                <li><a href="https://www.youtube.com/@blvckluster/playlists" target="_blank" class="email-link">YouTube Channel</a></li>
-            </ul>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="logo-container">
+            <h1>B L V C K   L U S T E R</h1>
+            <div class="tagline">Technical Art Studio | Real-Time Environments</div>
         </div>
+        <div class="scroll-indicator">↓ Scroll to Explore</div>
+    </section>
+
+    <!-- Main Content Grid -->
+    <div class="grid-container">
+        
+        <!-- Protocol Card (Featured) -->
+        <div class="card featured fade-in">
+            <h2 class="card-title">Our Protocol</h2>
+            <div class="card-content">
+                <ul>
+                    <li>High-performance real-time assets</li>
+                    <li>Optimized for efficiency & scalability</li>
+                    <li>Zero-texture lightweight workflow</li>
+                    <li>Professional polish & immersive visuals</li>
+                    <li>DNA-driven rendering systems</li>
+                    <li>Universal shader architecture</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Expertise Card -->
+        <div class="card fade-in">
+            <h2 class="card-title">Expertise</h2>
+            <div class="card-content">
+                <ul>
+                    <li>Game Engine Shaders</li>
+                    <li>Procedural Workflows</li>
+                    <li>Performance Optimization</li>
+                    <li>Vertex Color Baking</li>
+                    <li>Vertex & Dynamics</li>
+                    <li>Technical Art Direction</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Tech Stack Card -->
+        <div class="card fade-in">
+            <h2 class="card-title">Tech Stack</h2>
+            <div class="card-content">
+                <div class="tech-badges">
+                    <span class="badge">Unity Engine</span>
+                    <span class="badge">Unreal Engine</span>
+                    <span class="badge">HLSL/ShaderLab</span>
+                    <span class="badge">Blender</span>
+                    <span class="badge">Python</span>
+                    <span class="badge">Git</span>
+                    <span class="badge">C#</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Featured Projects Card -->
+        <div class="card fade-in">
+            <h2 class="card-title">Featured Work</h2>
+            <div class="card-content">
+                <ul>
+                    <li>Advanced Shader Systems</li>
+                    <li>DNA-Mesh Architecture</li>
+                    <li>Vertex-Driven Dynamics</li>
+                    <li>Zero-Texture Asset Pipelines</li>
+                    <li>Real-Time Environment Tools</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Philosophy Card -->
+        <div class="card fade-in">
+            <h2 class="card-title">Philosophy</h2>
+            <div class="card-content">
+                <p style="color: #bbb; line-height: 1.8;">
+                    We believe in <strong style="color: #fff;">self-contained assets</strong> that carry their own DNA. 
+                    By baking intelligence into mesh data, we create portable, efficient, and future-proof content 
+                    that scales from mobile to high-end platforms. <strong style="color: #fff;">Zero dependencies. Maximum performance.</strong>
+                </p>
+            </div>
+        </div>
+
+        <!-- Contact & Portfolio Card -->
+        <div class="card featured fade-in">
+            <h2 class="card-title">Connect & Explore</h2>
+            <div class="card-content">
+                <p style="margin-bottom: 20px; color: #999;">
+                    Explore our portfolio, technical documentation, and professional work across platforms:
+                </p>
+                <div class="links-grid">
+                    <a href="mailto:blvckluster@gmail.com" class="link-btn">📧 Email</a>
+                    <a href="https://x.com/blvckluster" target="_blank" class="link-btn">𝕏 Twitter/X</a>
+                    <a href="https://www.youtube.com/@blvckluster" target="_blank" class="link-btn">📺 YouTube</a>
+                    <a href="https://github.com/blvckluster" target="_blank" class="link-btn">💻 GitHub</a>
+                    <a href="https://wa.me/201090163435" target="_blank" class="link-btn">💬 WhatsApp</a>
+                </div>
+            </div>
+        </div>
+
     </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 BLVCK STUDIOS — DNA-DRIVEN RENDERING FOR THE NEXT GENERATION</p>
+    </footer>
+
+    <script>
+        // Smooth fade-in on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
 </body>
 </html>
-
